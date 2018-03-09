@@ -21,30 +21,47 @@
 ```node
 contract ExchangeProvider {
 
-  struct Status {
+  struct ProviderStatus {
     bool isRunning,
     string name,
     uint fee
   }
 
-  event TradeSuccess(
+  enum TradeStatusCode {
+    OK,
+    Expired,
+    Pending,
+    NotFound,
+    Failure
+  }
+
+  struct TradeStatus {
     string tradeId,
+    string pair,
     uint totalAmount,
     uint completedAmout,
-  );
+    TradeStatusCode code
+  }
 
-  event TradeFailure(
-    string tradeId,
-    uint errorCode
-  );
+  event TradeComplete(TradeStatus);
 
-  function ExchangeProvider() puhlic {}
+  enum OrderType {
+    Default,  // default as Market
+    Limit,
+    Market
+  }
 
-  function getProviderStatus() public return (Status) { ... }
+  function ExchangeProvider() public {}
 
-  function getExpectedRate(address _from, address _to) public return (uint) { ... }
+  function getProviderStatus() public return (ProviderStatus) { ... }
 
-  function excuteTrade(address _from, uint _amount, address _to) public payable return (string) { ... }
+  function getExpectedRate(string _from, string _to) public return (uint) { ... }
+
+  function excuteTrade(string _from, uint _amount, string _to, OrderType _type) public payable return (string) { ... }
+
+  function getTradeStatus(string _tradeId) public return (TradeStatus) { ... }
+
+  function updateTradeStatus(TradeStatus) public { ... }
 
 }
 ```
