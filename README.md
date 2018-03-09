@@ -16,7 +16,7 @@
   |<----------------------- orders completion && return ask tokens ---------------------|
   ```
 
-### Exchange Privider
+### Exchange Provider
 
 ```node
 contract ExchangeProvider {
@@ -39,9 +39,14 @@ contract ExchangeProvider {
     string tradeId,
     string pair,
     uint totalAmount,
+<<<<<<< HEAD
     uint completedAmout,
     TradeStatusCode code
   }
+=======
+    uint completedAmount,
+  );
+>>>>>>> master
 
   event TradeComplete(TradeStatus);
 
@@ -55,7 +60,11 @@ contract ExchangeProvider {
 
   function getProviderStatus() public return (ProviderStatus) { ... }
 
+<<<<<<< HEAD
   function getExpectedRate(string _from, string _to) public return (uint) { ... }
+=======
+  function ExchangeProvider() public {}
+>>>>>>> master
 
   function excuteTrade(string _from, uint _amount, string _to, OrderType _type) public payable return (string) { ... }
 
